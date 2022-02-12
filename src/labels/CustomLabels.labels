@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+	<labels>
+		<fullName>EquationResolveError</fullName>
+		<categories>Exceptions</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>EquationResolveError</shortDescription>
+		<value>Equation has not been properly resolved to RPN string {0}</value>
+	</labels>
+</CustomLabels>
