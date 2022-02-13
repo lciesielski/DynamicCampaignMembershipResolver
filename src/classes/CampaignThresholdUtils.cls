@@ -3,12 +3,12 @@ public with sharing class CampaignThresholdUtils {
 	public static final String RESOLVER_CLASS_SUFFIX = 'Resolver';
 
 	public interface IResolver {
-		Boolean isThresholdMet(CampaignMembershipUtils.ResolverData resolverData);
+		Boolean isThresholdMet(ResolverData resolverData);
 	}
 
 	public class BirthdayResolver implements IResolver {
 
-		public Boolean isThresholdMet(CampaignMembershipUtils.ResolverData resolverData) {
+		public Boolean isThresholdMet(ResolverData resolverData) {
 			if (resolverData.shouldAdvertise) {
 				return resolverData.customer.Birthdate != null && 
 					Integer.valueOf(resolverData.customer.Birthdate.month()) == System.today().month() + 1;
@@ -22,7 +22,7 @@ public with sharing class CampaignThresholdUtils {
 
 	public class EmployeeResolver implements IResolver {
 
-		public Boolean isThresholdMet(CampaignMembershipUtils.ResolverData resolverData) {
+		public Boolean isThresholdMet(ResolverData resolverData) {
 			return resolverData.customer.IsEmployee__c;
 		}
 
@@ -36,7 +36,7 @@ public with sharing class CampaignThresholdUtils {
 		@TestVisible
 		private Set<String> weekend = new Set<String>{'Sat','Sun'};
 
-		public Boolean isThresholdMet(CampaignMembershipUtils.ResolverData resolverData) {
+		public Boolean isThresholdMet(ResolverData resolverData) {
 			if (resolverData.shouldAdvertise) {
 				return weekdays.contains(System.now().format('E'));
 			} else {
@@ -44,6 +44,13 @@ public with sharing class CampaignThresholdUtils {
 			}
 		}
 
+	}
+
+	public class ResolverData {
+		public Boolean shouldAdvertise = false;
+		public Campaign campaign;
+		public CampaignThreshold__c threshold;
+		public Contact customer;
 	}
 	
 }

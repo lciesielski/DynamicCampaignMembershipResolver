@@ -10,7 +10,7 @@ public with sharing class CampaignMembershipUtils {
 		String equation = campaign.Equation__c;
 
 		for (CampaignThreshold__c threshold : campaign.CampaignThresholds__r) {
-			final ResolverData resolverData = new ResolverData();
+			final CampaignThresholdUtils.ResolverData resolverData = new CampaignThresholdUtils.ResolverData();
 			resolverData.customer = customer;
 			resolverData.campaign = campaign;
 			resolverData.threshold = threshold;
@@ -36,13 +36,6 @@ public with sharing class CampaignMembershipUtils {
 		}
 
 		return ReversePolishNotation.evaluateString(equation);
-	}
-
-	public class ResolverData {
-		public Boolean shouldAdvertise = false;
-		public Campaign campaign;
-		public CampaignThreshold__c threshold;
-		public Contact customer;
 	}
 
 }
